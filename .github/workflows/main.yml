@@ -1,0 +1,27 @@
+name: Multi-Step Workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  multi-task:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run Database Backup
+        uses: DaggupatiPavan/new-action2@v1
+        with:
+          command: 'echo "hello" > backup.sql'
+          step-name: 'Database Backup'
+      
+      - name: Run System Health Check
+        uses: DaggupatiPavan/new-action2@v1
+        with:
+          command: 'df -h && free -m'
+          step-name: 'System Health Check'
+      
+      - name: Run Network Diagnostics
+        uses: DaggupatiPavan/new-action2@v1
+        with:
+          command: 'ping -c 5 google.com && traceroute google.com'
+          step-name: 'Network Diagnostics'
